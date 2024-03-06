@@ -6,16 +6,22 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  TextInput,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
 import ProgressBar from 'react-native-progress-bar-horizontal';
 import PurpleButton from '../components/Button';
 import Image from 'react-native-remote-svg';
-
+import OtpInput from '../components/Otp';
 const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
+  const handleOtpChange = otp => {
+    // Validate the OTP or perform any action with the OTP in the parent component
+    console.log('Received OTP:', otp);
+    // Add your validation logic or further processing here
+  };
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -45,6 +51,9 @@ const OtpVerifyScreen = props => {
         <Text style={[styles.textbold, {marginTop: '0.5%', fontSize: 14}]}>
           +91 99292 77633
         </Text>
+        <View style={{marginVertical: '7%'}}>
+          <OtpInput onOtpChange={handleOtpChange} />
+        </View>
 
         <Text style={[styles.text, {lineHeight: 24}]}>Didn’t receive OTP?</Text>
         <TouchableOpacity>
@@ -70,7 +79,7 @@ const OtpVerifyScreen = props => {
       </View>
 
       <Image
-        source={require('../../assets/FrameNumber.svg')}
+        source={require('../../assets/FrameVerify.svg')}
         style={{
           height: (height * 50) / 100,
           width: (width * 100) / 100,
