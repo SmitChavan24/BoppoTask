@@ -37,9 +37,7 @@ const PhoneNumberScreen = props => {
     setDialCode(dial);
   };
   return (
-    <KeyboardAvoidingView
-      behavior={'height'}
-      style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -130,11 +128,12 @@ const PhoneNumberScreen = props => {
             keyboardType="numeric"
             cursorColor={'transparent'}></TextInput>
         </View>
-
-        <PurpleButton
-          title="Continue"
-          onPress={() => props.navigation.navigate('otpverify')}
-        />
+        <View style={{width: '90%', alignSelf: 'center'}}>
+          <PurpleButton
+            title="Continue"
+            onPress={() => props.navigation.navigate('otpverify')}
+          />
+        </View>
       </View>
       <View style={{flex: 1}}>
         <Image
@@ -168,7 +167,7 @@ const PhoneNumberScreen = props => {
           setBool({modal: false});
         }}
       />
-    </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 

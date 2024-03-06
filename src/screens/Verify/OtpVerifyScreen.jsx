@@ -5,6 +5,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
@@ -16,18 +17,18 @@ const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            style={{marginLeft: '3%'}}
+            style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
             <Octicans name="arrow-back" size={45} color="black" />
           </TouchableOpacity>
-          <View style={{marginLeft: '18%'}}>
+          <View style={{flex: 1}}>
             <ProgressBar
-              progress={0.5}
+              progress={0.2}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"
@@ -60,23 +61,22 @@ const OtpVerifyScreen = props => {
             Resend Code
           </Text>
         </TouchableOpacity>
+        <View style={{width: '90%', alignSelf: 'center'}}>
+          <PurpleButton
+            title="Verify"
+            onPress={() => props.navigation.navigate('nameverify')}
+          />
+        </View>
+      </View>
 
-        <PurpleButton
-          title="Verify"
-          onPress={() => props.navigation.navigate('nameverify')}
-        />
-      </View>
-      <View style={{flex: 1}}>
-        <Image
-          source={require('../../assets/FrameNumber.svg')}
-          style={{
-            height: (height * 50) / 100,
-            width: (width * 100) / 100,
-            //   backgroundColor: 'red',
-          }}
-        />
-      </View>
-    </View>
+      <Image
+        source={require('../../assets/FrameNumber.svg')}
+        style={{
+          height: (height * 50) / 100,
+          width: (width * 100) / 100,
+        }}
+      />
+    </ScrollView>
   );
 };
 

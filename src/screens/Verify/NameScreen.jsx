@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import ProgressBar from 'react-native-progress-bar-horizontal';
@@ -16,18 +17,18 @@ import Image from 'react-native-remote-svg';
 const {width, height} = Dimensions.get('window');
 const NameScreen = props => {
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            style={{marginLeft: '3%'}}
+            style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
             <Octicans name="arrow-back" size={45} color="black" />
           </TouchableOpacity>
-          <View style={{marginLeft: '18%'}}>
+          <View style={{flex: 1}}>
             <ProgressBar
-              progress={0.7}
+              progress={0.2}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"
@@ -47,7 +48,7 @@ const NameScreen = props => {
           ]}>
           Let's Get to Know Each Other
         </Text>
-        <View style={{width: '80%', alignSelf: 'center'}}>
+        <View style={{width: '90%', alignSelf: 'center'}}>
           <TextInput
             cursorColor={'#000000'}
             style={{
@@ -79,7 +80,7 @@ const NameScreen = props => {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

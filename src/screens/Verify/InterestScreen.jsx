@@ -5,6 +5,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
@@ -14,16 +15,16 @@ import PurpleButton from '../components/Button';
 const {width, height} = Dimensions.get('window');
 const InterestScreen = props => {
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            style={{marginLeft: '3%'}}
+            style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
             <Octicans name="arrow-back" size={45} color="black" />
           </TouchableOpacity>
-          <View style={{marginLeft: '18%'}}>
+          <View style={{flex: 1}}>
             <ProgressBar
               progress={0.2}
               width={220}
@@ -47,6 +48,16 @@ const InterestScreen = props => {
           </Text>
         </View>
       </View>
+      <View style={{flex: 1}}>
+        <Image
+          source={require('../../assets/FrameInterest.svg')}
+          style={{
+            height: (height * 50) / 100,
+            width: (width * 100) / 100,
+            //   backgroundColor: 'red',
+          }}
+        />
+      </View>
       <View
         style={{
           bottom: 0,
@@ -60,17 +71,7 @@ const InterestScreen = props => {
           onPress={() => props.navigation.navigate('photoverify')}
         />
       </View>
-      <View style={{flex: 1}}>
-        <Image
-          source={require('../../assets/FrameInterest.svg')}
-          style={{
-            height: (height * 50) / 100,
-            width: (width * 100) / 100,
-            //   backgroundColor: 'red',
-          }}
-        />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 

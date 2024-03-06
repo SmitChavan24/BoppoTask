@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   BackHandler,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Image from 'react-native-remote-svg';
@@ -54,7 +55,7 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar
         barStyle="light-content"
         backgroundColor="#FFFFFF" // Replace with your desired color
@@ -85,7 +86,6 @@ const LoginScreen = props => {
         }}>
         Discover Love Where Your Story Begins.
       </Text>
-
       <Text
         style={{
           color: '#000000',
@@ -100,55 +100,64 @@ const LoginScreen = props => {
         Join us to discover your ideal partner and ignite the sparks of romance
         in your journey.
       </Text>
-      <SwipeButton
-        title="Login with Phone"
-        railBackgroundColor="#FF5069"
-        railBorderColor="#FF5069"
-        onSwipeSuccess={() => props.navigation.navigate('phoneverify')}
-        titleColor="#FFFFFF"
-        titleFontSize={18}
-        shouldResetAfterSuccess={true}
-        railFillBackgroundColor="#FFFFFF"
-        railFillBorderColor="#FFFFFF"
-        titleStyles={{fontFamily: 'Inter-SemiBold'}}
-        thumbIconBorderColor="#FFFFFF"
-        thumbIconBackgroundColor="#FFFFFF"
-        railStyles={{
-          margin: '1%',
-        }}
-        thumbIconComponent={CheckoutButton}
-        containerStyles={{
-          width: '80%',
-          alignSelf: 'center',
-          backgroundColor: '#FF5069',
-          marginVertical: '5%',
-        }}
-      />
-      <TouchableOpacity>
-        <Text
-          style={{
-            color: '#000000',
-            textAlign: 'center',
-            fontSize: 14,
-            lineHeight: 16,
-            fontFamily: 'Inter-Regular',
-            letterSpacing: 0.3,
+
+      <View
+        style={{
+          bottom: 0,
+          position: 'absolute',
+          width: '100%',
+          marginBottom: '3%',
+        }}>
+        <SwipeButton
+          title="Login with Phone"
+          railBackgroundColor="#FF5069"
+          railBorderColor="#FF5069"
+          onSwipeSuccess={() => props.navigation.navigate('phoneverify')}
+          titleColor="#FFFFFF"
+          titleFontSize={18}
+          shouldResetAfterSuccess={true}
+          railFillBackgroundColor="#FFFFFF"
+          railFillBorderColor="#FFFFFF"
+          titleStyles={{fontFamily: 'Inter-SemiBold'}}
+          thumbIconBorderColor="#FFFFFF"
+          thumbIconBackgroundColor="#FFFFFF"
+          railStyles={{
+            margin: '1%',
+          }}
+          thumbIconComponent={CheckoutButton}
+          containerStyles={{
+            width: '80%',
             alignSelf: 'center',
-          }}>
-          Don’t have an account?{' '}
+            backgroundColor: '#FF5069',
+            marginVertical: '5%',
+          }}
+        />
+        <TouchableOpacity>
           <Text
             style={{
-              color: '#FF5069',
+              color: '#000000',
               textAlign: 'center',
-              fontFamily: 'Inter-SemiBold',
-              fontSize: 15,
+              fontSize: 14,
               lineHeight: 16,
+              fontFamily: 'Inter-Regular',
+              letterSpacing: 0.3,
+              alignSelf: 'center',
             }}>
-            Sign Up
+            Don’t have an account?{' '}
+            <Text
+              style={{
+                color: '#FF5069',
+                textAlign: 'center',
+                fontFamily: 'Inter-SemiBold',
+                fontSize: 15,
+                lineHeight: 16,
+              }}>
+              Sign Up
+            </Text>
           </Text>
-        </Text>
-      </TouchableOpacity>
-    </View>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 

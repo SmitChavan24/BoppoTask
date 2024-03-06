@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Pressable,
+  ScrollView,
 } from 'react-native';
 import ProgressBar from 'react-native-progress-bar-horizontal';
 import React from 'react';
@@ -17,18 +18,18 @@ const {width, height} = Dimensions.get('window');
 
 const PhotoScreen = props => {
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            style={{marginLeft: '3%'}}
+            style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
             <Octicans name="arrow-back" size={45} color="black" />
           </TouchableOpacity>
-          <View style={{marginLeft: '18%'}}>
+          <View style={{flex: 1}}>
             <ProgressBar
-              progress={1}
+              progress={0.2}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"
@@ -70,7 +71,8 @@ const PhotoScreen = props => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 flex: 1,
-                marginRight: '4%',
+                padding: '25%',
+                marginRight: '3%',
                 borderRadius: 10,
               }}>
               <MaterialIcons name="add-circle" size={45} color="#FF5069" />
@@ -175,7 +177,7 @@ const PhotoScreen = props => {
           onPress={() => console.log('it ended')}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
