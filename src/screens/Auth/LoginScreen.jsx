@@ -79,7 +79,8 @@ const LoginScreen = props => {
           fontSize: 24,
           fontFamily: 'Inter-SemiBold',
           lineHeight: 29,
-          width: '60%',
+          width: '78%',
+          marginBottom: '5%',
           alignSelf: 'center',
         }}>
         Discover Love Where Your Story Begins.
@@ -92,7 +93,8 @@ const LoginScreen = props => {
           fontSize: 15,
           fontFamily: 'Inter-Regular',
           lineHeight: 20,
-          width: '47%',
+          width: '70%',
+          marginBottom: '3%',
           alignSelf: 'center',
         }}>
         Join us to discover your ideal partner and ignite the sparks of romance

@@ -44,11 +44,11 @@ const PhoneNumberScreen = props => {
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            style={{marginLeft: '3%'}}
+            style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
             <Octicans name="arrow-back" size={45} color="black" />
           </TouchableOpacity>
-          <View style={{marginLeft: '18%'}}>
+          <View style={{flex: 1}}>
             <ProgressBar
               progress={0.2}
               width={220}
@@ -62,77 +62,79 @@ const PhoneNumberScreen = props => {
           </View>
         </View>
 
-        <View style={{alignSelf: 'center', marginVertical: '10%'}}>
-          <Text style={styles.textbold}>My Number Is</Text>
-          <View>
+        <Text style={[styles.textbold, {marginTop: '10%', marginBottom: '3%'}]}>
+          My Number Is
+        </Text>
+        <View>
+          <Text
+            style={[
+              styles.text,
+              {color: '#333333', width: '70%', lineHeight: 20},
+            ]}>
+            We'll need your phone number to send an OTP for verification.
+          </Text>
+        </View>
+
+        <View
+          style={{
+            borderRadius: 28,
+            marginVertical: '3%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#FFFFFF',
+            alignSelf: 'center',
+          }}>
+          <CountryFlag
+            isoCode={dialCode.iso ? `${dialCode.iso}` : 'in'}
+            size={32}
+            style={{
+              resizeMode: 'cover',
+              borderRadius: 100,
+            }}
+          />
+
+          <TouchableOpacity
+            onPress={() => setBool({modal: true})}
+            style={{flexDirection: 'row'}}>
             <Text
               style={[
                 styles.text,
-                {color: '#333333', width: '70%', lineHeight: 20},
+                {color: '#000000', lineHeight: 20, marginLeft: 10},
               ]}>
-              We'll need your phone number to send an OTP for verification.
+              {dialCode.code ? dialCode.code : '+91'}
             </Text>
-          </View>
+            <MaterialIcons
+              name="keyboard-arrow-down"
+              size={30}
+              color="#8E8E8E"
+            />
+          </TouchableOpacity>
 
           <View
             style={{
-              borderRadius: 28,
-              marginVertical: '3%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: '#FFFFFF',
-              alignSelf: 'center',
-            }}>
-            <CountryFlag
-              isoCode={dialCode.iso ? `${dialCode.iso}` : 'in'}
-              size={32}
-              style={{
-                resizeMode: 'cover',
-                borderRadius: 100,
-              }}
-            />
-
-            <TouchableOpacity
-              onPress={() => setBool({modal: true})}
-              style={{flexDirection: 'row'}}>
-              <Text
-                style={[
-                  styles.text,
-                  {color: '#000000', lineHeight: 20, marginLeft: 10},
-                ]}>
-                {dialCode.code ? dialCode.code : '+91'}
-              </Text>
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={30}
-                color="#8E8E8E"
-              />
-            </TouchableOpacity>
-
-            <View
-              style={{
-                height: 18,
-                width: 2,
-                backgroundColor: '#D8D8D8',
-              }}></View>
-            <TextInput
-              placeholder="Enter Phone Number"
-              placeholderTextColor={'#888888'}
-              style={{
-                fontSize: 15,
-                lineHeight: 20,
-                fontFamily: 'Inter-Regular',
-                color: 'black',
-                paddingHorizontal: 5,
-              }}
-              keyboardType="numeric"
-              cursorColor={'transparent'}></TextInput>
-          </View>
-          <PurpleButton
-            title="Continue"
-            onPress={() => props.navigation.navigate('otpverify')}
-          />
+              height: 18,
+              width: 2,
+              backgroundColor: '#D8D8D8',
+            }}></View>
+          <TextInput
+            placeholder="Enter Phone Number"
+            placeholderTextColor={'#888888'}
+            style={{
+              fontSize: 15,
+              lineHeight: 20,
+              fontFamily: 'Inter-Regular',
+              color: 'black',
+              paddingHorizontal: 5,
+              flex: 0.6,
+            }}
+            keyboardType="numeric"
+            cursorColor={'transparent'}></TextInput>
         </View>
+
+        <PurpleButton
+          title="Continue"
+          onPress={() => props.navigation.navigate('otpverify')}
+        />
       </View>
       <View style={{flex: 1}}>
         <Image
@@ -158,7 +160,6 @@ const PhoneNumberScreen = props => {
             fontWeight: '500',
           },
         }}
-        initialState={'+91'}
         androidWindowSoftInputMode={'pan'}
         onBackdropPress={() => setBool({modal: false})}
         inputPlaceholder="Search your Country Code"

@@ -6,6 +6,9 @@ import LoginScreen from './src/screens/Auth/LoginScreen';
 import Splash from './src/screens/Splash';
 import PhoneNumberScreen from './src/screens/Verify/PhoneNumberScreen';
 import OtpVerifyScreen from './src/screens/Verify/OtpVerifyScreen';
+import NameScreen from './src/screens/Verify/NameScreen';
+import InterestScreen from './src/screens/Verify/InterestScreen';
+import PhotoScreen from './src/screens/Verify/PhotoScreen';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -36,6 +39,27 @@ const App = () => {
         <Stack.Screen
           name="otpverify"
           component={OtpVerifyScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="nameverify"
+          component={NameScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="interestverify"
+          component={InterestScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="photoverify"
+          component={PhotoScreen}
           options={{
             headerShown: false,
           }}
