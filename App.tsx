@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from './src/screens/Auth/LoginScreen';
 import Splash from './src/screens/Splash';
 import PhoneNumberScreen from './src/screens/Verify/PhoneNumberScreen';
+import OtpVerifyScreen from './src/screens/Verify/OtpVerifyScreen';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -28,6 +29,13 @@ const App = () => {
         <Stack.Screen
           name="phoneverify"
           component={PhoneNumberScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="otpverify"
+          component={OtpVerifyScreen}
           options={{
             headerShown: false,
           }}

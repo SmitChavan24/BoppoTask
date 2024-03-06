@@ -5,15 +5,46 @@ import {
   StatusBar,
   Dimensions,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Image from 'react-native-remote-svg';
 import SwipeButton from 'rn-swipe-button';
 import Feather from 'react-native-vector-icons/FontAwesome5';
+import Toast from 'react-native-toast-message';
+import {useIsFocused} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
 const LoginScreen = props => {
+  const [exitApp, SetExitApp] = useState(false);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
+      );
+      return () => backHandler.remove();
+    }
+  }, [exitApp, isFocused]);
+  const backAction = () => {
+    if (exitApp == false) {
+      SetExitApp(true);
+      Toast.show({
+        type: 'error',
+        text1: 'Please Back Again To Exit',
+      });
+    } else if (exitApp == true) {
+      BackHandler.exitApp();
+    }
+
+    setTimeout(() => {
+      SetExitApp(false);
+    }, 1500);
+    return true;
+  };
   const CheckoutButton = () => {
     return (
       <View>
@@ -28,6 +59,7 @@ const LoginScreen = props => {
         barStyle="light-content"
         backgroundColor="#FFFFFF" // Replace with your desired color
       />
+      <Toast position="bottom" bottomOffset={20} />
       <View style={{alignItems: 'center'}}>
         <Image
           source={require('../../assets/Cupid.svg')}
@@ -73,6 +105,7 @@ const LoginScreen = props => {
         onSwipeSuccess={() => props.navigation.navigate('phoneverify')}
         titleColor="#FFFFFF"
         titleFontSize={18}
+        shouldResetAfterSuccess={true}
         railFillBackgroundColor="#FFFFFF"
         railFillBorderColor="#FFFFFF"
         titleStyles={{fontFamily: 'Inter-SemiBold'}}
