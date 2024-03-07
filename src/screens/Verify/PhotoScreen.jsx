@@ -13,65 +13,33 @@ import ProgressBar from 'react-native-progress-bar-horizontal';
 import React, {useState} from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import Imager from 'react-native-remote-svg';
 import PurpleButton from '../components/Button';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const {width, height} = Dimensions.get('window');
 
 const PhotoScreen = props => {
-  const [image, setImage] = useState('');
-  const [ione, setImageone] = useState('');
-  const [itwo, setImagetwo] = useState('');
-  const [ithree, setImagethree] = useState('');
-  const [ifour, setImagefour] = useState('');
-  const [ifive, setImagefive] = useState('');
-  const pickImage = async event => {
-    console.log(event);
-    try {
-      ImagePicker.openPicker({
-        width: 500,
-        height: 600,
-        cropping: true,
+  const [images, setImages] = useState({
+    image: '',
+    one: '',
+    two: '',
+    three: '',
+    four: '',
+    five: '',
+  });
+
+  const pickImage = key => {
+    ImagePicker.openPicker({
+      width: 500,
+      height: 600,
+      cropping: true,
+    })
+      .then(image => {
+        setImages(prevImages => ({...prevImages, [key]: image.path}));
       })
-        .then(image => {
-          if (event == 'image') {
-            setImage(image.path);
-          } else if (event == 'one') {
-            setImageone(image.path);
-          } else if (event == 'two') {
-            setImagetwo(image.path);
-          } else if (event == 'three') {
-            setImagethree(image.path);
-          } else if (event == 'four') {
-            setImagefour(image.path);
-          } else {
-            setImagefive(image.path);
-          }
-        })
-        .catch(err => console.log(err));
-    } catch (error) {}
+      .catch(err => console.log(err));
   };
 
-  const pickImageS = async event => {
-    console.log(event);
-    try {
-      ImagePicker.openPicker({
-        width: 500,
-        height: 600,
-        cropping: true,
-      })
-        .then(image => {
-          if (event == 'three') {
-            setImagethree(image.path);
-          } else if (event == 'four') {
-            setImagefour(image.path);
-          } else {
-            setImagefive(image.path);
-          }
-        })
-        .catch(err => console.log(err));
-    } catch (error) {}
-  };
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -118,9 +86,9 @@ const PhotoScreen = props => {
               justifyContent: 'space-evenly',
               marginBottom: '3%',
             }}>
-            {image ? (
+            {images.image ? (
               <Image
-                source={{uri: image}}
+                source={{uri: images.image}}
                 style={{
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -149,17 +117,16 @@ const PhotoScreen = props => {
             )}
 
             <View style={{justifyContent: 'space-evenly'}}>
-              {ione ? (
+              {images.one ? (
                 <Image
-                  source={{uri: ione}}
+                  source={{uri: images.one}}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                     flex: 1,
-                    padding: '25%',
-                    paddingVertical: '30%',
-                    marginRight: '3%',
                     borderRadius: 10,
+                    marginBottom: '10%',
+                    padding: '15%',
                   }}></Image>
               ) : (
                 <Pressable
@@ -178,17 +145,16 @@ const PhotoScreen = props => {
                   <MaterialIcons name="add-circle" size={45} color="#FF5069" />
                 </Pressable>
               )}
-              {itwo ? (
+              {images.two ? (
                 <Image
-                  source={{uri: itwo}}
+                  source={{uri: images.two}}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                     flex: 1,
-                    padding: '25%',
-                    paddingVertical: '30%',
-                    marginRight: '3%',
                     borderRadius: 10,
+                    marginBottom: '10%',
+                    padding: '15%',
                   }}></Image>
               ) : (
                 <Pressable
@@ -209,17 +175,16 @@ const PhotoScreen = props => {
             </View>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            {ithree ? (
+            {images.three ? (
               <Image
-                source={{uri: ithree}}
+                source={{uri: images.three}}
                 style={{
                   justifyContent: 'center',
                   alignItems: 'center',
                   flex: 1,
-                  padding: '25%',
-                  paddingVertical: '30%',
                   marginRight: '3%',
                   borderRadius: 10,
+                  padding: '10%',
                 }}
               />
             ) : (
@@ -235,21 +200,20 @@ const PhotoScreen = props => {
                   borderRadius: 10,
                   padding: '10%',
                 }}
-                onPressIn={() => pickImageS('three')}>
+                onPressIn={() => pickImage('three')}>
                 <MaterialIcons name="add-circle" size={45} color="#FF5069" />
               </Pressable>
             )}
-            {ifour ? (
+            {images.four ? (
               <Image
-                source={{uri: ifour}}
+                source={{uri: images.four}}
                 style={{
                   justifyContent: 'center',
                   alignItems: 'center',
                   flex: 1,
-                  padding: '25%',
-                  paddingVertical: '30%',
                   marginRight: '3%',
                   borderRadius: 10,
+                  padding: '12%',
                 }}></Image>
             ) : (
               <Pressable
@@ -264,24 +228,23 @@ const PhotoScreen = props => {
                   padding: '10%',
                   borderRadius: 10,
                 }}
-                onPress={() => pickImageS('four')}>
+                onPress={() => pickImage('four')}>
                 <MaterialIcons name="add-circle" size={45} color="#FF5069" />
               </Pressable>
             )}
-            {ifive ? (
+            {images.five ? (
               <Image
-                source={{uri: ifive}}
+                source={{uri: images.five}}
                 style={{
                   justifyContent: 'center',
                   alignItems: 'center',
                   flex: 1,
-                  padding: '25%',
-                  paddingVertical: '30%',
-                  marginRight: '3%',
+
                   borderRadius: 10,
+                  padding: '10%',
                 }}></Image>
             ) : (
-              <TouchableOpacity
+              <Pressable
                 style={{
                   borderColor: '#FF5069',
                   borderWidth: 1,
@@ -289,28 +252,24 @@ const PhotoScreen = props => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   flex: 1,
-
                   borderRadius: 10,
                   padding: '10%',
                 }}
-                onPress={() => pickImageS()}>
+                onPress={() => pickImage('five')}>
                 <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-              </TouchableOpacity>
+              </Pressable>
             )}
           </View>
         </View>
       </View>
-
-      <View style={{flex: 1}}>
-        <Image
-          source={require('../../assets/FrameInterest.svg')}
-          style={{
-            height: (height * 50) / 100,
-            width: (width * 100) / 100,
-            //   backgroundColor: 'red',
-          }}
-        />
-      </View>
+      <Imager
+        source={require('../../assets/FrameInterest.svg')}
+        style={{
+          height: (height * 35) / 100,
+          width: (width * 100) / 100,
+          // backgroundColor: 'red',
+        }}
+      />
       <View
         style={{
           bottom: 0,
@@ -331,6 +290,13 @@ const PhotoScreen = props => {
 export default PhotoScreen;
 
 const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    borderRadius: 10,
+    width: 150,
+    height: 200,
+    resizeMode: 'cover',
+  },
   text: {
     color: '#000000',
     textAlign: 'center',
