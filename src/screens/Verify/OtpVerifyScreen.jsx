@@ -17,6 +17,7 @@ import Toast from 'react-native-toast-message';
 const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
+  const Number = props.route.params.number;
   const [digit, setDigit] = useState(['', '', '', '']);
   const digitRefs = [useRef(), useRef(), useRef(), useRef()];
 
@@ -86,7 +87,7 @@ const OtpVerifyScreen = props => {
         <Text style={styles.textbold}>Verification Code</Text>
         <Text style={styles.text}> Please enter code we just send to</Text>
         <Text style={[styles.textbold, {marginTop: '0.5%', fontSize: 14}]}>
-          +91 99292 77633
+          +91 {Number ? Number : '9930630872'}
         </Text>
         {/* <OtpInput onOtpChange={handleOtpChange} /> */}
         <View style={{marginVertical: '7%'}}>
@@ -104,6 +105,8 @@ const OtpVerifyScreen = props => {
                   style={styles.input}
                   autoFocus={index === 0}
                   cursorColor={'transparent'}
+                  placeholder="-"
+                  placeholderTextColor={'black'}
                   value={digit[index]}
                   onChangeText={text => handleInputChange(text, index)}
                   onKeyPress={event =>

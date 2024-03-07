@@ -27,6 +27,7 @@ const PhoneNumberScreen = props => {
     modal: false,
   });
   const [dialCode, setDialCode] = useState('');
+  const [number, setNumber] = useState('');
   const onChangeInput = (item, name) => {
     console.log(item.name.en);
 
@@ -35,6 +36,9 @@ const PhoneNumberScreen = props => {
       iso: item.code,
     };
     setDialCode(dial);
+  };
+  const ChangeInput = event => {
+    setNumber(event);
   };
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
@@ -125,13 +129,16 @@ const PhoneNumberScreen = props => {
               paddingHorizontal: 5,
               flex: 0.6,
             }}
+            onChangeText={ChangeInput}
             keyboardType="numeric"
             cursorColor={'transparent'}></TextInput>
         </View>
         <View style={{width: '90%', alignSelf: 'center'}}>
           <PurpleButton
             title="Continue"
-            onPress={() => props.navigation.navigate('otpverify')}
+            onPress={() =>
+              props.navigation.navigate('otpverify', {number: number})
+            }
           />
         </View>
       </View>
