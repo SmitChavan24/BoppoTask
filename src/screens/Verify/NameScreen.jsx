@@ -28,7 +28,7 @@ const NameScreen = props => {
           </TouchableOpacity>
           <View style={{flex: 1}}>
             <ProgressBar
-              progress={0.2}
+              progress={0.7}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"

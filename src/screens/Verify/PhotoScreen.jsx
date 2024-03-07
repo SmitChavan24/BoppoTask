@@ -45,7 +45,7 @@ const PhotoScreen = props => {
           </TouchableOpacity>
           <View style={{flex: 1}}>
             <ProgressBar
-              progress={0.2}
+              progress={1}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"

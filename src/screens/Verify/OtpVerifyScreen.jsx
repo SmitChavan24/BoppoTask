@@ -18,14 +18,14 @@ const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
   const [otp, setOtp] = useState('');
-  const handleOtpChange = otpp => {
-    // Validate the OTP or perform any action with the OTP in the parent component
-    console.log('Received OTP:', otpp);
+  // const handleOtpChange = otpp => {
+  //   // Validate the OTP or perform any action with the OTP in the parent component
+  //   console.log('Received OTP:', otpp);
 
-    setOtp(otpp);
-    console.log(otp);
-    // Add your validation logic or further processing here
-  };
+  //   setOtp(otpp);
+  //   console.log(otp);
+  //   // Add your validation logic or further processing here
+  // };
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -38,7 +38,7 @@ const OtpVerifyScreen = props => {
           </TouchableOpacity>
           <View style={{flex: 1}}>
             <ProgressBar
-              progress={0.2}
+              progress={0.5}
               width={220}
               borderWidth={1}
               fillColor="#FF5069"
@@ -55,8 +55,57 @@ const OtpVerifyScreen = props => {
         <Text style={[styles.textbold, {marginTop: '0.5%', fontSize: 14}]}>
           +91 99292 77633
         </Text>
+        {/* <OtpInput onOtpChange={handleOtpChange} /> */}
         <View style={{marginVertical: '7%'}}>
-          <OtpInput onOtpChange={handleOtpChange} />
+          <View
+            style={{
+              width: '100%',
+              height: '8%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'row',
+            }}>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginHorizontal: '1%',
+                borderWidth: 1,
+                borderColor: 'rgba(228, 228, 228, 1)',
+                backgroundColor: otp.length > 0 ? '#44226E' : 'white',
+              }}></View>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginHorizontal: '1%',
+                borderWidth: 1,
+                borderColor: 'rgba(228, 228, 228, 1)',
+                backgroundColor: otp.length > 1 ? '#44226E' : 'white',
+              }}></View>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginHorizontal: '1%',
+                borderWidth: 1,
+                borderColor: 'rgba(228, 228, 228, 1)',
+                backgroundColor: otp.length > 2 ? '#44226E' : 'white',
+              }}></View>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginHorizontal: '1%',
+                borderWidth: 1,
+                borderColor: 'rgba(228, 228, 228, 1)',
+                backgroundColor: otp.length > 3 ? '#44226E' : 'white',
+              }}></View>
+          </View>
         </View>
 
         <Text style={[styles.text, {lineHeight: 24}]}>Didn’t receive OTP?</Text>
