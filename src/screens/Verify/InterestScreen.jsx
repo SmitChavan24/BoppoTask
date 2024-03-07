@@ -56,7 +56,11 @@ const InterestScreen = props => {
           <TouchableOpacity
             style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
-            <Octicans name="arrow-back" size={35} color={'black'} />
+            <Octicans
+              name="arrow-back"
+              size={35}
+              color={dataInterest.one ? '#FFFFFF' : 'black'}
+            />
           </TouchableOpacity>
           <View style={{flex: 1}}>
             <ProgressBar
@@ -86,116 +90,252 @@ const InterestScreen = props => {
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
             <TouchableOpacity
               onPress={() => OnClick('one')}
-              style={[styles.interest, {backgroundColor: '#FF5069'}]}>
-              <Octicans name="book" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.one ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="book"
+                size={35}
+                color={dataInterest.one ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Reading</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.one ? {color: '#FFFFFF'} : {},
+                ]}>
+                Reading
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => OnClick('two')}
-              style={styles.interest}>
+              style={[
+                styles.interest,
+                dataInterest.two ? {backgroundColor: '#FF5069'} : {},
+              ]}>
               <MaterialCommunityIcons
                 name="camera-iris"
                 size={35}
-                color={'black'}
+                color={dataInterest.two ? '#FFFFFF' : 'black'}
               />
 
-              <Text style={[styles.itext, {}]}>PhotoGraphy</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.two ? {color: '#FFFFFF'} : {},
+                ]}>
+                PhotoGraphy
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
             <TouchableOpacity
               onPress={() => OnClick('three')}
-              style={styles.interest}>
-              <Octicans name="game-controller" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.three ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="game-controller"
+                size={35}
+                color={dataInterest.three ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Gaming</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.three ? {color: '#FFFFFF'} : {},
+                ]}>
+                Gaming
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('four')}
-              style={styles.interest}>
-              <Octicans name="musical-notes-sharp" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.four ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="musical-notes-sharp"
+                size={35}
+                color={dataInterest.four ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Music</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.four ? {color: '#FFFFFF'} : {},
+                ]}>
+                Music
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('five')}
-              style={styles.interest}>
+              style={[
+                styles.interest,
+                dataInterest.five ? {backgroundColor: '#FF5069'} : {},
+              ]}>
               <MaterialCommunityIcons
                 name="airplane"
                 size={35}
-                color={'black'}
+                color={dataInterest.five ? '#FFFFFF' : 'black'}
               />
 
-              <Text style={[styles.itext, {}]}>Travel</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.five ? {color: '#FFFFFF'} : {},
+                ]}>
+                Travel
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
             <TouchableOpacity
               onPress={() => OnClick('six')}
-              style={styles.interest}>
-              <Octicans name="color-palette-sharp" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.six ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="color-palette-sharp"
+                size={35}
+                color={dataInterest.six ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Painting</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.six ? {color: '#FFFFFF'} : {},
+                ]}>
+                Painting
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('seven')}
-              style={styles.interest}>
+              style={[
+                styles.interest,
+                dataInterest.seven ? {backgroundColor: '#FF5069'} : {},
+              ]}>
               <MaterialCommunity
                 name="emoji-people"
                 size={35}
-                color={'black'}
+                color={dataInterest.seven ? '#FFFFFF' : 'black'}
               />
 
-              <Text style={[styles.itext, {}]}>Politics</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.seven ? {color: '#FFFFFF'} : {},
+                ]}>
+                Politics
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
             <TouchableOpacity
               onPress={() => OnClick('eight')}
-              style={styles.interest}>
+              style={[
+                styles.interest,
+                dataInterest.eight ? {backgroundColor: '#FF5069'} : {},
+              ]}>
               <MaterialCommunityIcons
                 name="camera-iris"
                 size={35}
-                color={'black'}
+                color={dataInterest.eight ? '#FFFFFF' : 'black'}
               />
 
-              <Text style={[styles.itext, {}]}>Charity</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.eight ? {color: '#FFFFFF'} : {},
+                ]}>
+                Charity
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('nine')}
-              style={styles.interest}>
+              style={[
+                styles.interest,
+                dataInterest.nine ? {backgroundColor: '#FF5069'} : {},
+              ]}>
               <MaterialCommunityIcons
                 name="silverware-fork-knife"
                 size={35}
-                color={'black'}
+                color={dataInterest.nine ? '#FFFFFF' : 'black'}
               />
 
-              <Text style={[styles.itext, {}]}>Cooking</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.nine ? {color: '#FFFFFF'} : {},
+                ]}>
+                Cooking
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('ten')}
-              style={styles.interest}>
-              <Octicans name="paw" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.ten ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="paw"
+                size={35}
+                color={dataInterest.ten ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Pets</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.ten ? {color: '#FFFFFF'} : {},
+                ]}>
+                Pets
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
             <TouchableOpacity
               onPress={() => OnClick('eleven')}
-              style={styles.interest}>
-              <Octicans name="basketball-outline" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.eleven ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <Octicans
+                name="basketball-outline"
+                size={35}
+                color={dataInterest.eleven ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>Sports</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.eleven ? {color: '#FFFFFF'} : {},
+                ]}>
+                Sports
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => OnClick('twelve')}
-              style={styles.interest}>
-              <MaterialCommunityIcons name="hanger" size={35} color={'black'} />
+              style={[
+                styles.interest,
+                dataInterest.twelve ? {backgroundColor: '#FF5069'} : {},
+              ]}>
+              <MaterialCommunityIcons
+                name="hanger"
+                size={35}
+                color={dataInterest.twelve ? '#FFFFFF' : 'black'}
+              />
 
-              <Text style={[styles.itext, {}]}>fashion</Text>
+              <Text
+                style={[
+                  styles.itext,
+                  dataInterest.twelve ? {color: '#FFFFFF'} : {},
+                ]}>
+                fashion
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -261,5 +401,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     margin: '2%',
   },
-  itext: {marginLeft: '2%', color: 'black'},
+  itext: {
+    marginLeft: '2%',
+    color: 'black',
+    fontFamily: 'Inter-Regular',
+    fontSize: 14,
+  },
 });

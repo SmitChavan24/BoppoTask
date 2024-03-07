@@ -7,16 +7,32 @@ import {
   Dimensions,
   Pressable,
   ScrollView,
+  Image,
 } from 'react-native';
 import ProgressBar from 'react-native-progress-bar-horizontal';
-import React from 'react';
+import React, {useState} from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
-import Image from 'react-native-remote-svg';
+import ImagePicker from 'react-native-image-crop-picker';
+
 import PurpleButton from '../components/Button';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const {width, height} = Dimensions.get('window');
 
 const PhotoScreen = props => {
+  const [image, setImage] = useState('');
+
+  const pickImage = async e => {
+    try {
+      ImagePicker.openPicker({
+        width: 500,
+        height: 600,
+        cropping: true,
+      }).then(image => {
+        setImage(image.path);
+      });
+    } catch (error) {}
+  };
+
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -63,20 +79,36 @@ const PhotoScreen = props => {
               justifyContent: 'space-evenly',
               marginBottom: '3%',
             }}>
-            <Pressable
-              style={{
-                borderColor: '#FF5069',
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
-                padding: '25%',
-                marginRight: '3%',
-                borderRadius: 10,
-              }}>
-              <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-            </Pressable>
+            {image ? (
+              <Image
+                source={{uri: image}}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  padding: '25%',
+                  paddingVertical: '30%',
+                  marginRight: '3%',
+                  borderRadius: 10,
+                }}></Image>
+            ) : (
+              <Pressable
+                style={{
+                  borderColor: '#FF5069',
+                  borderWidth: 1,
+                  borderStyle: 'dashed',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  padding: '25%',
+                  marginRight: '3%',
+                  borderRadius: 10,
+                }}
+                onPress={pickImage}>
+                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+              </Pressable>
+            )}
+
             <View style={{justifyContent: 'space-evenly'}}>
               <Pressable
                 style={{
