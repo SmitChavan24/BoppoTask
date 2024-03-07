@@ -21,8 +21,8 @@ const OtpVerifyScreen = props => {
   const digitRefs = [useRef(), useRef(), useRef(), useRef()];
 
   const HandleSubmit = () => {
-    const enteredValue = digit.join(''); // Concatenate the entered digits
-    const expectedValue = '5154'; // Your expected value
+    const enteredValue = digit.join('');
+    const expectedValue = '5154';
 
     if (enteredValue === expectedValue) {
       props.navigation.navigate('nameverify');

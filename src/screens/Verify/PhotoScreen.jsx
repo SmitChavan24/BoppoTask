@@ -20,19 +20,58 @@ const {width, height} = Dimensions.get('window');
 
 const PhotoScreen = props => {
   const [image, setImage] = useState('');
-
-  const pickImage = async e => {
+  const [ione, setImageone] = useState('');
+  const [itwo, setImagetwo] = useState('');
+  const [ithree, setImagethree] = useState('');
+  const [ifour, setImagefour] = useState('');
+  const [ifive, setImagefive] = useState('');
+  const pickImage = async event => {
+    console.log(event);
     try {
       ImagePicker.openPicker({
         width: 500,
         height: 600,
         cropping: true,
-      }).then(image => {
-        setImage(image.path);
-      });
+      })
+        .then(image => {
+          if (event == 'image') {
+            setImage(image.path);
+          } else if (event == 'one') {
+            setImageone(image.path);
+          } else if (event == 'two') {
+            setImagetwo(image.path);
+          } else if (event == 'three') {
+            setImagethree(image.path);
+          } else if (event == 'four') {
+            setImagefour(image.path);
+          } else {
+            setImagefive(image.path);
+          }
+        })
+        .catch(err => console.log(err));
     } catch (error) {}
   };
 
+  const pickImageS = async event => {
+    console.log(event);
+    try {
+      ImagePicker.openPicker({
+        width: 500,
+        height: 600,
+        cropping: true,
+      })
+        .then(image => {
+          if (event == 'three') {
+            setImagethree(image.path);
+          } else if (event == 'four') {
+            setImagefour(image.path);
+          } else {
+            setImagefive(image.path);
+          }
+        })
+        .catch(err => console.log(err));
+    } catch (error) {}
+  };
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -104,84 +143,160 @@ const PhotoScreen = props => {
                   marginRight: '3%',
                   borderRadius: 10,
                 }}
-                onPress={pickImage}>
+                onPress={() => pickImage('image')}>
                 <MaterialIcons name="add-circle" size={45} color="#FF5069" />
               </Pressable>
             )}
 
             <View style={{justifyContent: 'space-evenly'}}>
-              <Pressable
-                style={{
-                  borderColor: '#FF5069',
-                  borderWidth: 1,
-                  borderStyle: 'dashed',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flex: 1,
-                  borderRadius: 10,
-                  marginBottom: '10%',
-                  padding: '10%',
-                }}>
-                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-              </Pressable>
-              <Pressable
-                style={{
-                  borderColor: '#FF5069',
-                  borderWidth: 1,
-                  borderStyle: 'dashed',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flex: 1,
-                  padding: '10%',
-                  borderRadius: 10,
-                }}>
-                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-              </Pressable>
+              {ione ? (
+                <Image
+                  source={{uri: ione}}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    padding: '25%',
+                    paddingVertical: '30%',
+                    marginRight: '3%',
+                    borderRadius: 10,
+                  }}></Image>
+              ) : (
+                <Pressable
+                  style={{
+                    borderColor: '#FF5069',
+                    borderWidth: 1,
+                    borderStyle: 'dashed',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    borderRadius: 10,
+                    marginBottom: '10%',
+                    padding: '10%',
+                  }}
+                  onPress={() => pickImage('one')}>
+                  <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+                </Pressable>
+              )}
+              {itwo ? (
+                <Image
+                  source={{uri: itwo}}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    padding: '25%',
+                    paddingVertical: '30%',
+                    marginRight: '3%',
+                    borderRadius: 10,
+                  }}></Image>
+              ) : (
+                <Pressable
+                  style={{
+                    borderColor: '#FF5069',
+                    borderWidth: 1,
+                    borderStyle: 'dashed',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    padding: '10%',
+                    borderRadius: 10,
+                  }}
+                  onPress={() => pickImage('two')}>
+                  <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+                </Pressable>
+              )}
             </View>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            <Pressable
-              style={{
-                borderColor: '#FF5069',
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
-                marginRight: '3%',
-                borderRadius: 10,
-                padding: '10%',
-              }}>
-              <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-            </Pressable>
-            <Pressable
-              style={{
-                borderColor: '#FF5069',
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
-                marginRight: '3%',
-                padding: '10%',
-                borderRadius: 10,
-              }}>
-              <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-            </Pressable>
-            <Pressable
-              style={{
-                borderColor: '#FF5069',
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
+            {ithree ? (
+              <Image
+                source={{uri: ithree}}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  padding: '25%',
+                  paddingVertical: '30%',
+                  marginRight: '3%',
+                  borderRadius: 10,
+                }}
+              />
+            ) : (
+              <Pressable
+                style={{
+                  borderColor: '#FF5069',
+                  borderWidth: 1,
+                  borderStyle: 'dashed',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  marginRight: '3%',
+                  borderRadius: 10,
+                  padding: '10%',
+                }}
+                onPressIn={() => pickImageS('three')}>
+                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+              </Pressable>
+            )}
+            {ifour ? (
+              <Image
+                source={{uri: ifour}}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  padding: '25%',
+                  paddingVertical: '30%',
+                  marginRight: '3%',
+                  borderRadius: 10,
+                }}></Image>
+            ) : (
+              <Pressable
+                style={{
+                  borderColor: '#FF5069',
+                  borderWidth: 1,
+                  borderStyle: 'dashed',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  marginRight: '3%',
+                  padding: '10%',
+                  borderRadius: 10,
+                }}
+                onPress={() => pickImageS('four')}>
+                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+              </Pressable>
+            )}
+            {ifive ? (
+              <Image
+                source={{uri: ifive}}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                  padding: '25%',
+                  paddingVertical: '30%',
+                  marginRight: '3%',
+                  borderRadius: 10,
+                }}></Image>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  borderColor: '#FF5069',
+                  borderWidth: 1,
+                  borderStyle: 'dashed',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
 
-                borderRadius: 10,
-                padding: '10%',
-              }}>
-              <MaterialIcons name="add-circle" size={45} color="#FF5069" />
-            </Pressable>
+                  borderRadius: 10,
+                  padding: '10%',
+                }}
+                onPress={() => pickImageS()}>
+                <MaterialIcons name="add-circle" size={45} color="#FF5069" />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
