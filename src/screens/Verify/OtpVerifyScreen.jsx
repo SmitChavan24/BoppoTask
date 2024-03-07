@@ -17,9 +17,13 @@ import OtpInput from '../components/Otp';
 const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
-  const handleOtpChange = otp => {
+  const [otp, setOtp] = useState('');
+  const handleOtpChange = otpp => {
     // Validate the OTP or perform any action with the OTP in the parent component
-    console.log('Received OTP:', otp);
+    console.log('Received OTP:', otpp);
+
+    setOtp(otpp);
+    console.log(otp);
     // Add your validation logic or further processing here
   };
   return (

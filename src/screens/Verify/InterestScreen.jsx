@@ -7,7 +7,7 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProgressBar from 'react-native-progress-bar-horizontal';
@@ -17,6 +17,28 @@ import MaterialCommunity from 'react-native-vector-icons/MaterialIcons';
 const {width, height} = Dimensions.get('window');
 
 const InterestScreen = props => {
+  const [dataInterest, setDataInterest] = useState({
+    one: false,
+    two: false,
+    three: false,
+    four: false,
+    five: false,
+    six: false,
+    seven: false,
+    eight: false,
+    nine: false,
+    ten: false,
+    eleven: false,
+    twelve: false,
+  });
+
+  const OnClick = key => {
+    setDataInterest(prevData => ({
+      ...prevData,
+      [key]: !prevData[key], // Toggle the value (opposite of the current value)
+    }));
+    console.log(dataInterest);
+  };
   return (
     <ScrollView
       contentContainerStyle={{
@@ -34,7 +56,7 @@ const InterestScreen = props => {
           <TouchableOpacity
             style={{marginLeft: '3%', flex: 0.3}}
             onPress={() => props.navigation.goBack()}>
-            <Octicans name="arrow-back" size={35} color="black" />
+            <Octicans name="arrow-back" size={35} color={'black'} />
           </TouchableOpacity>
           <View style={{flex: 1}}>
             <ProgressBar
@@ -62,87 +84,118 @@ const InterestScreen = props => {
 
         <View style={{width: '90%', alignSelf: 'center', marginVertical: '8%'}}>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="book" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('one')}
+              style={[styles.interest, {backgroundColor: '#FF5069'}]}>
+              <Octicans name="book" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Reading</Text>
+              <Text style={[styles.itext, {}]}>Reading</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
+
+            <TouchableOpacity
+              onPress={() => OnClick('two')}
+              style={styles.interest}>
               <MaterialCommunityIcons
                 name="camera-iris"
                 size={35}
-                color="black"
+                color={'black'}
               />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>
-                PhotoGraphy
-              </Text>
+              <Text style={[styles.itext, {}]}>PhotoGraphy</Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="game-controller" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('three')}
+              style={styles.interest}>
+              <Octicans name="game-controller" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Gaming</Text>
+              <Text style={[styles.itext, {}]}>Gaming</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="musical-notes-sharp" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('four')}
+              style={styles.interest}>
+              <Octicans name="musical-notes-sharp" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Music</Text>
+              <Text style={[styles.itext, {}]}>Music</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
-              <MaterialCommunityIcons name="airplane" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('five')}
+              style={styles.interest}>
+              <MaterialCommunityIcons
+                name="airplane"
+                size={35}
+                color={'black'}
+              />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Travel</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="color-palette-sharp" size={35} color="black" />
-
-              <Text style={{marginLeft: '2%', color: 'black'}}>Painting</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
-              <MaterialCommunity name="emoji-people" size={35} color="black" />
-
-              <Text style={{marginLeft: '2%', color: 'black'}}>Politics</Text>
+              <Text style={[styles.itext, {}]}>Travel</Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-            <TouchableOpacity style={styles.interest}>
+            <TouchableOpacity
+              onPress={() => OnClick('six')}
+              style={styles.interest}>
+              <Octicans name="color-palette-sharp" size={35} color={'black'} />
+
+              <Text style={[styles.itext, {}]}>Painting</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => OnClick('seven')}
+              style={styles.interest}>
+              <MaterialCommunity
+                name="emoji-people"
+                size={35}
+                color={'black'}
+              />
+
+              <Text style={[styles.itext, {}]}>Politics</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+            <TouchableOpacity
+              onPress={() => OnClick('eight')}
+              style={styles.interest}>
               <MaterialCommunityIcons
                 name="camera-iris"
                 size={35}
-                color="black"
+                color={'black'}
               />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Charity</Text>
+              <Text style={[styles.itext, {}]}>Charity</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
+            <TouchableOpacity
+              onPress={() => OnClick('nine')}
+              style={styles.interest}>
               <MaterialCommunityIcons
                 name="silverware-fork-knife"
                 size={35}
-                color="black"
+                color={'black'}
               />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Cooking</Text>
+              <Text style={[styles.itext, {}]}>Cooking</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="paw" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('ten')}
+              style={styles.interest}>
+              <Octicans name="paw" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Pets</Text>
+              <Text style={[styles.itext, {}]}>Pets</Text>
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-            <TouchableOpacity style={styles.interest}>
-              <Octicans name="basketball-outline" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('eleven')}
+              style={styles.interest}>
+              <Octicans name="basketball-outline" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>Sports</Text>
+              <Text style={[styles.itext, {}]}>Sports</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.interest}>
-              <MaterialCommunityIcons name="hanger" size={35} color="black" />
+            <TouchableOpacity
+              onPress={() => OnClick('twelve')}
+              style={styles.interest}>
+              <MaterialCommunityIcons name="hanger" size={35} color={'black'} />
 
-              <Text style={{marginLeft: '2%', color: 'black'}}>fashion</Text>
+              <Text style={[styles.itext, {}]}>fashion</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -204,7 +257,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
     padding: '2%',
+    paddingHorizontal: '5%',
     borderRadius: 30,
     margin: '2%',
   },
+  itext: {marginLeft: '2%', color: 'black'},
 });
