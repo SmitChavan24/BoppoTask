@@ -8,27 +8,60 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
 import Octicans from 'react-native-vector-icons/Ionicons';
 import ProgressBar from 'react-native-progress-bar-horizontal';
 import PurpleButton from '../components/Button';
 import Image from 'react-native-remote-svg';
-import OtpInput from '../components/Otp';
+import Toast from 'react-native-toast-message';
 const {width, height} = Dimensions.get('window');
 
 const OtpVerifyScreen = props => {
-  const [otp, setOtp] = useState('');
-  // const handleOtpChange = otpp => {
-  //   // Validate the OTP or perform any action with the OTP in the parent component
-  //   console.log('Received OTP:', otpp);
+  const [digit, setDigit] = useState(['', '', '', '']);
+  const digitRefs = [useRef(), useRef(), useRef(), useRef()];
 
-  //   setOtp(otpp);
-  //   console.log(otp);
-  //   // Add your validation logic or further processing here
-  // };
+  const HandleSubmit = () => {
+    const enteredValue = digit.join(''); // Concatenate the entered digits
+    const expectedValue = '5154'; // Your expected value
+
+    if (enteredValue === expectedValue) {
+      props.navigation.navigate('nameverify');
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'Entered Otp Is Not Valid',
+      });
+    }
+  };
+  const handleInputChange = useCallback(
+    (text, index, event) => {
+      const newDigit = [...digit];
+      newDigit[index] = text;
+      setDigit(newDigit);
+
+      if (event?.nativeEvent?.key === 'Backspace') {
+        setDigit(['', '', '', '']);
+        if (digitRefs[0] && digitRefs[0].current) {
+          digitRefs[0].current.focus();
+        }
+      }
+
+      if (
+        text !== '' &&
+        index < digitRefs.length - 1 &&
+        digitRefs[index + 1] &&
+        digitRefs[index + 1].current
+      ) {
+        digitRefs[index + 1].current.focus();
+      }
+    },
+    [digit, digitRefs],
+  );
+
   return (
     <ScrollView contentContainerStyle={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
+      <Toast position="top" bottomOffset={20} />
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
@@ -65,51 +98,33 @@ const OtpVerifyScreen = props => {
               justifyContent: 'center',
               flexDirection: 'row',
             }}>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                marginHorizontal: '1%',
-                borderWidth: 1,
-                borderColor: 'rgba(228, 228, 228, 1)',
-                backgroundColor: otp.length > 0 ? '#44226E' : 'white',
-              }}></View>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                marginHorizontal: '1%',
-                borderWidth: 1,
-                borderColor: 'rgba(228, 228, 228, 1)',
-                backgroundColor: otp.length > 1 ? '#44226E' : 'white',
-              }}></View>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                marginHorizontal: '1%',
-                borderWidth: 1,
-                borderColor: 'rgba(228, 228, 228, 1)',
-                backgroundColor: otp.length > 2 ? '#44226E' : 'white',
-              }}></View>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                marginHorizontal: '1%',
-                borderWidth: 1,
-                borderColor: 'rgba(228, 228, 228, 1)',
-                backgroundColor: otp.length > 3 ? '#44226E' : 'white',
-              }}></View>
+            {[0, 1, 2, 3].map(index => (
+              <View key={index} style={styles.otp}>
+                <TextInput
+                  style={styles.input}
+                  autoFocus={index === 0}
+                  cursorColor={'transparent'}
+                  value={digit[index]}
+                  onChangeText={text => handleInputChange(text, index)}
+                  onKeyPress={event =>
+                    handleInputChange(digit[index], index, event)
+                  }
+                  keyboardType="numeric"
+                  maxLength={1}
+                  ref={digitRefs[index]}
+                  onSubmitEditing={() => {
+                    if (index < digitRefs.length - 1) {
+                      digitRefs[index + 1].current.focus();
+                    }
+                  }}
+                />
+              </View>
+            ))}
           </View>
         </View>
 
         <Text style={[styles.text, {lineHeight: 24}]}>Didn’t receive OTP?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setDigit(['', '', '', ''])}>
           <Text
             style={[
               styles.textbold,
@@ -124,10 +139,7 @@ const OtpVerifyScreen = props => {
           </Text>
         </TouchableOpacity>
         <View style={{width: '90%', alignSelf: 'center'}}>
-          <PurpleButton
-            title="Verify"
-            onPress={() => props.navigation.navigate('nameverify')}
-          />
+          <PurpleButton title="Verify" onPress={HandleSubmit} />
         </View>
       </View>
 
@@ -145,6 +157,16 @@ const OtpVerifyScreen = props => {
 export default OtpVerifyScreen;
 
 const styles = StyleSheet.create({
+  otp: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginHorizontal: '1%',
+    borderWidth: 1,
+    borderColor: 'rgba(228, 228, 228, 1)',
+  },
   text: {
     color: '#000000',
     textAlign: 'center',
@@ -165,4 +187,102 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     alignSelf: 'center',
   },
+  input: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#000000',
+    fontFamily: 'Inter-SemiBold',
+  },
 });
+
+{
+  /* <View
+style={{
+  width: '100%',
+  height: '8%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'row',
+}}>
+<View
+  style={{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: '1%',
+    borderWidth: 1,
+    borderColor: 'rgba(228, 228, 228, 1)',
+  }}>
+  <TextInput
+    style={styles.input}
+    autoFocus={true}
+    cursorColor={'transparent'}
+    value={digit}
+    onChangeText={text => handleInputChange(text)}
+    // onFocus={() => handleFocus(index)}
+    keyboardType="numeric"
+    maxLength={1}
+  />
+</View>
+<View
+  style={{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: '1%',
+    borderWidth: 1,
+    borderColor: 'rgba(228, 228, 228, 1)',
+  }}>
+  <TextInput
+    style={styles.input}
+    autoFocus={true}
+    cursorColor={'transparent'}
+    value={digit}
+    onChangeText={text => handleInputChange(text)}
+    // onFocus={() => handleFocus(index)}
+    keyboardType="numeric"
+    maxLength={1}
+  />
+</View>
+<View
+  style={{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: '1%',
+    borderWidth: 1,
+    borderColor: 'rgba(228, 228, 228, 1)',
+  }}>
+  <TextInput
+    style={styles.input}
+    autoFocus={true}
+    cursorColor={'transparent'}
+    value={digit}
+    onChangeText={text => handleInputChange(text)}
+    // onFocus={() => handleFocus(index)}
+    keyboardType="numeric"
+    maxLength={1}
+  />
+</View>
+<View
+  style={{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: '1%',
+    borderWidth: 1,
+    borderColor: 'rgba(228, 228, 228, 1)',
+  }}>
+  <TextInput
+    style={styles.input}
+    autoFocus={true}
+    cursorColor={'transparent'}
+    value={otp}
+    onChangeText={text => handleInputChange(text)}
+    // onFocus={() => handleFocus(index)}
+    keyboardType="numeric"
+    maxLength={1}
+  />
+</View>
+</View> */
+}
